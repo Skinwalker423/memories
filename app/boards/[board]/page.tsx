@@ -1,46 +1,40 @@
-import wick from "../../../public/images/johmwick.jpg";
-import cheescake from "../../../public/images/cheesecake.jpg";
-import girl from "../../../public/images/avatar.webp";
-import brisket from "../../../public/images/brisket.jpeg";
-import curry from "../../../public/images/curry.jpg";
-import potter from "../../../public/images/fakeavatar.jpg";
-import skinwalker from "../../../public/images/skinwalker.jpg";
-import ramen from "../../../public/images/ramen.jpg";
+"use client";
+import { useState } from "react";
 
 import Image from "next/image";
 
 const mockImages = [
   {
     alt: "wick",
-    src: wick,
+    src: "/images/johmwick.jpg",
   },
   {
     alt: "cheesecake",
-    src: cheescake,
+    src: "/images/cheesecake.jpg",
   },
   {
     alt: "curry",
-    src: curry,
+    src: "/images/curry.jpg",
   },
   {
     alt: "skinwalker",
-    src: skinwalker,
+    src: "/images/skinwalker.jpg",
   },
   {
     alt: "harry potter",
-    src: potter,
+    src: "/images/fakeavatar.jpg",
   },
   {
     alt: "brisket",
-    src: brisket,
+    src: "/images/brisket.jpeg",
   },
   {
     alt: "girl",
-    src: girl,
+    src: "/images/avatar.webp",
   },
   {
     alt: "ramen",
-    src: ramen,
+    src: "/images/ramen.jpg",
   },
 ];
 
@@ -50,6 +44,23 @@ export default function Page({
   params: { board: string };
 }) {
   console.log(params);
+
+  const [images, setImages] = useState<
+    { alt: string; src: string }[]
+  >([]);
+
+  const shuffle = (
+    array: { alt: string; src: string }[]
+  ) => {
+    const newArr = [...array, ...array];
+    for (let i = newArr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+    }
+    setImages(shuffle);
+    return newArr;
+  };
+
   return (
     <main className='container mx-auto w-full h-screen flex-col justify-center items-center border'>
       <h1>Board title</h1>
