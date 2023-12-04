@@ -100,7 +100,7 @@ export default function Page({
     <main className='container mx-auto w-full h-screen flex-col justify-center items-center border'>
       <h1>Board title</h1>
       <section>
-        <div className='w-full h-full grid grid-cols-4'>
+        <div className='w-full h-full grid grid-cols-4 gap-1 px-1'>
           {images.length > 0 &&
             images.map(({ alt, src }, index) => {
               const correct = correctImages.includes(index);
@@ -110,13 +110,13 @@ export default function Page({
               const selected =
                 selectedOne === index ||
                 selectedTwo === index
-                  ? "border border-rose-500"
+                  ? "border-1 border-rose-500-"
                   : "";
 
               return (
                 <button
                   disabled={correct}
-                  className={`relative ${selected} ${
+                  className={`relative w-full max-sm:h-24 h-52 flex gap-1 ${selected} ${
                     correct && ""
                   }`}
                   key={index}
@@ -129,8 +129,9 @@ export default function Page({
                   <Image
                     src={src}
                     alt={alt}
-                    width={50}
-                    height={50}
+                    fill
+                    sizes='(min-width: 80px)'
+                    className='object-cover w-full h-auto'
                   />
                   <div
                     className={`${
