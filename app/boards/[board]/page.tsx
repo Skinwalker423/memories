@@ -91,20 +91,15 @@ export default function Page({
       setSelectedOne(null);
       setSelectedTwo(null);
       console.log("correct length", correctImages.length);
-      if (correctImages.length === 16) {
-        console.log("you won!");
-      }
     }
   }, [selectedOne, selectedTwo]);
 
   const handleImageClick = () => {};
 
-  console.log("correct length", correctImages.length);
-
   return (
     <main className='container mx-auto w-full h-screen flex-col justify-center items-center border'>
       <h1>Board title</h1>
-      <section>
+      <section className='relative'>
         <div className='w-full h-full grid grid-cols-4 gap-1 px-1'>
           {images.length > 0 &&
             images.map(({ alt, src }, index) => {
@@ -150,6 +145,17 @@ export default function Page({
               );
             })}
         </div>
+        {correctImages.length !== 16 && (
+          <div className='absolute z-50 bg-red-800 flex justify-center items-center flex-col gap-2 text-white w-52 h-44 md:w-[600px] md:h-80 top-1/3 left-1/4 rounded-3xl'>
+            <h2>You won!</h2>
+            <button
+              className='bg-green-700 text-white '
+              onClick={() => setCorrectImages([])}
+            >
+              Play Again?
+            </button>
+          </div>
+        )}
       </section>
     </main>
   );
