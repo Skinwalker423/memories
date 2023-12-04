@@ -68,6 +68,14 @@ export default function Page({
     setImages(newArr);
   };
 
+  const resetGame = () => {
+    setCorrectImages([]);
+    setSelectedOne(null);
+    setSelectedTwo(null);
+
+    shuffle(mockImages);
+  };
+
   useEffect(() => {
     shuffle(mockImages);
   }, []);
