@@ -72,7 +72,9 @@ export default function Page({
     shuffle(mockImages);
   }, []);
   useEffect(() => {
-    if (selectedOne && selectedTwo) {
+    console.log("selected 1", selectedOne);
+    console.log("selected 2", selectedTwo);
+    if (selectedOne !== null && selectedTwo !== null) {
       if (
         images[selectedOne].src === images[selectedTwo].src
       ) {
@@ -88,6 +90,7 @@ export default function Page({
 
       setSelectedOne(null);
       setSelectedTwo(null);
+      console.log("correct length", correctImages.length);
       if (correctImages.length === 16) {
         console.log("you won!");
       }
@@ -95,6 +98,8 @@ export default function Page({
   }, [selectedOne, selectedTwo]);
 
   const handleImageClick = () => {};
+
+  console.log("correct length", correctImages.length);
 
   return (
     <main className='container mx-auto w-full h-screen flex-col justify-center items-center border'>
@@ -104,24 +109,23 @@ export default function Page({
           {images.length > 0 &&
             images.map(({ alt, src }, index) => {
               const correct = correctImages.includes(index);
-              console.log("correct", correct);
-              console.log("correct list", correctImages);
 
               const selected =
                 selectedOne === index ||
                 selectedTwo === index
-                  ? "border-1 border-rose-500-"
+                  ? "border-2 border-rose-500"
                   : "";
 
               return (
                 <button
-                  disabled={correct}
+                  disabled={correct || !!selected}
                   className={`relative w-full max-sm:h-24 h-52 flex gap-1 ${selected} ${
                     correct && ""
                   }`}
                   key={index}
                   onClick={() =>
-                    !selectedOne && !selectedTwo
+                    selectedOne === null &&
+                    selectedTwo === null
                       ? setSelectedOne(index)
                       : setSelectedTwo(index)
                   }
