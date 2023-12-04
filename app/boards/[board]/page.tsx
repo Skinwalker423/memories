@@ -76,12 +76,14 @@ export default function Page({
     shuffle(mockImages);
   };
 
+  const handlePlayAgainClick = () => {
+    resetGame();
+  };
+
   useEffect(() => {
     shuffle(mockImages);
   }, []);
   useEffect(() => {
-    console.log("selected 1", selectedOne);
-    console.log("selected 2", selectedTwo);
     if (selectedOne !== null && selectedTwo !== null) {
       if (
         images[selectedOne].src === images[selectedTwo].src
@@ -153,12 +155,12 @@ export default function Page({
               );
             })}
         </div>
-        {correctImages.length !== 16 && (
+        {correctImages.length === 16 && (
           <div className='absolute z-50 bg-red-800 flex justify-center items-center flex-col gap-2 text-white w-52 h-44 md:w-[600px] md:h-80 top-1/3 left-1/4 rounded-3xl'>
             <h2>You won!</h2>
             <button
               className='bg-green-700 text-white '
-              onClick={() => setCorrectImages([])}
+              onClick={handlePlayAgainClick}
             >
               Play Again?
             </button>
