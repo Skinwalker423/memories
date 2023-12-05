@@ -98,9 +98,10 @@ export default function Page({
         console.log("incorrect!");
       }
 
-      setSelectedOne(null);
-      setSelectedTwo(null);
-      console.log("correct length", correctImages.length);
+      setTimeout(() => {
+        setSelectedOne(null);
+        setSelectedTwo(null);
+      }, 1000);
     }
   }, [selectedOne, selectedTwo]);
 
@@ -135,17 +136,27 @@ export default function Page({
                       : setSelectedTwo(index)
                   }
                 >
-                  <Image
-                    src={src}
-                    alt={alt}
-                    fill
-                    sizes='(min-width: 80px)'
-                    className='object-cover w-full h-auto'
-                  />
+                  {selected || correct ? (
+                    <Image
+                      src={src}
+                      alt={alt}
+                      fill
+                      sizes='(min-width: 80px)'
+                      className='object-cover w-full h-auto'
+                    />
+                  ) : (
+                    <Image
+                      src={"/next.svg"}
+                      alt={"stock"}
+                      fill
+                      sizes='(min-width: 80px)'
+                      className='object-cover w-full h-auto'
+                    />
+                  )}
                   <div
                     className={`${
                       correct
-                        ? "absolute bg-gray-400 bg-opacity-75 inset-0 w-full h-full"
+                        ? "absolute flex justify-center items-center bg-gray-400 bg-opacity-75 inset-0 w-full h-full text-red-600"
                         : "hidden"
                     }`}
                   >
