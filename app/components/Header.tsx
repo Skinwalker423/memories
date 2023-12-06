@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import { signIn, signOut } from "next-auth/react";
 
 const Header = () => {
   return (
@@ -7,7 +9,18 @@ const Header = () => {
         <a href='/'>Logo</a>
         <div className='flex gap-3'>
           <a href={"/boards"}>Boards</a>
-          <div>Sign In</div>
+          <button
+            className='bg-green-400 px-4 py-2 rounded-xl hover:bg-green-600'
+            onClick={() => signIn()}
+          >
+            Sign In
+          </button>
+          <button
+            className='bg-red-400 px-4 py-2 rounded-xl hover:bg-red-500'
+            onClick={() => signOut()}
+          >
+            Sign Out
+          </button>
         </div>
       </nav>
     </header>
