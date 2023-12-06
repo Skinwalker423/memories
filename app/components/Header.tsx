@@ -1,15 +1,10 @@
 "use client";
 
-import {
-  signIn,
-  signOut,
-  getSession,
-} from "next-auth/react";
-
-import { isUserLoggedIn } from "@/utils";
+import { signIn, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 const Header = () => {
-  const session = isUserLoggedIn();
+  const session = useSession();
   console.log(session);
   return (
     <header className=' w-full px-10 bg-slate-400'>
@@ -17,7 +12,7 @@ const Header = () => {
         <a href='/'>Logo</a>
         <div className='flex gap-3'>
           <a href={"/boards"}>Boards</a>
-          {!session ? (
+          {!session.data ? (
             <button
               className='bg-green-400 px-4 py-2 rounded-xl hover:bg-green-600'
               onClick={() => signIn()}
