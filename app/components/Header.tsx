@@ -26,10 +26,10 @@ const Header = ({
             </button>
           ) : (
             <button
-              className='bg-red-400 px-4 py-2 rounded-xl hover:bg-red-500'
+              className='bg-neutral-600 px-4 py-2 rounded-xl text-white hover:bg-red-500'
               onClick={() => signOut()}
             >
-              Sign Out,
+              Sign Out
             </button>
           )}
         </div>
