@@ -105,7 +105,11 @@ export default function Page({
     }
   }, [selectedOne, selectedTwo]);
 
-  const handleImageClick = () => {};
+  const handleImageClick = (index: number) => {
+    selectedOne === null && selectedTwo === null
+      ? setSelectedOne(index)
+      : setSelectedTwo(index);
+  };
 
   return (
     <main className='container mx-auto w-full h-screen flex-col justify-center items-center border'>
@@ -129,12 +133,7 @@ export default function Page({
                     correct && ""
                   }`}
                   key={index}
-                  onClick={() =>
-                    selectedOne === null &&
-                    selectedTwo === null
-                      ? setSelectedOne(index)
-                      : setSelectedTwo(index)
-                  }
+                  onClick={() => handleImageClick(index)}
                 >
                   {selected || correct ? (
                     <Image
