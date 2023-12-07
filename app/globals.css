@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .nav-gradient {
+    @apply bg-gradient-to-b from-slate-500 to-white;
+  }
+}
