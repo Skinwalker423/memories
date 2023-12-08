@@ -4,17 +4,17 @@ import Hero from "./components/Hero";
 const boards = [
   {
     title: "John Wick Theme",
-    id: 0,
+    id: "0",
     image: "/images/johmwick.jpg",
   },
   {
     title: "Harry Potter Theme",
-    id: 1,
+    id: "1",
     image: "/images/fakeavatar.jpg",
   },
   {
     title: "Delicious Deserts Theme",
-    id: 2,
+    id: "2",
     image: "/images/cheesecake.jpg",
   },
 ];
@@ -30,6 +30,7 @@ export default async function Home() {
               key={id}
               title={title}
               image={image}
+              id={id}
             />
           );
         })}
