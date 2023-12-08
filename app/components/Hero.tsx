@@ -13,9 +13,12 @@ const Hero = () => {
         animi quod in, nulla, nobis et consequatur
         repellendus cumque eveniet.
       </p>
-      <button className='bg-yellow-400 px-4 py-2 rounded-xl text-gray-800'>
+      <a
+        href='/boards'
+        className='bg-yellow-400 px-4 py-3 rounded-xl text-gray-800'
+      >
         Browse Memory Boards
-      </button>
+      </a>
     </section>
   );
 };
