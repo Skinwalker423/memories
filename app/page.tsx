@@ -5,7 +5,7 @@ const boards = [
   {
     title: "John Wick Theme",
     id: 0,
-    image: "/images/johnwick.jpg",
+    image: "/images/johmwick.jpg",
   },
   {
     title: "Harry Potter Theme",
@@ -23,9 +23,17 @@ export default async function Home() {
   return (
     <main className='w-full h-full justify-center'>
       <Hero />
-      {boards.map(({ title, id, image }) => {
-        return <BoardCard />;
-      })}
+      <div className='flex flex-wrap gap-5 justify-center'>
+        {boards.map(({ title, id, image }) => {
+          return (
+            <BoardCard
+              key={id}
+              title={title}
+              image={image}
+            />
+          );
+        })}
+      </div>
     </main>
   );
 }

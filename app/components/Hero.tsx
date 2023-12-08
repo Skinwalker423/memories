@@ -2,7 +2,7 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <section className='flex flex-col justify-between items-center text-center mt-5 gap-5'>
+    <section className='flex flex-col justify-between items-center text-center my-5 gap-5'>
       <h1 className='md:text-6xl text-3xl header-gradient'>
         Memories
       </h1>
