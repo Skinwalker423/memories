@@ -117,6 +117,16 @@ export default function Page({
 
   return (
     <main className='max-w-6xl mx-auto w-full h-full flex-col justify-center items-center'>
+      <div className='absolute w-60 left-0 bg-neutral-100 h-full hidden md:block'>
+        <h3>Sidebar</h3>
+        <p>Stats</p>
+        <p
+          onClick={handlePlayAgainClick}
+          className='cursor-pointer'
+        >
+          reset game
+        </p>
+      </div>
       <h1 className='text-2xl font-bold text-red-400 text-center'>
         Board title
       </h1>
