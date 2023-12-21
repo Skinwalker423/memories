@@ -115,7 +115,7 @@ export default function Page({
     <main className='container mx-auto w-full h-screen flex-col justify-center items-center border'>
       <h1>Board title</h1>
       <section className='relative'>
-        <div className='w-full h-full grid grid-cols-4 gap-1 px-1'>
+        <div className='w-full h-full grid grid-cols-4 gap-2 px-1'>
           {images.length > 0 &&
             images.map(({ alt, src }, index) => {
               const correct = correctImages.includes(index);
@@ -129,7 +129,7 @@ export default function Page({
               return (
                 <button
                   disabled={correct || !!selected}
-                  className={`relative w-full max-sm:h-24 h-52 flex gap-1 ${selected} ${
+                  className={`relative w-full max-sm:h-24 rounded-md bg-red-300 h-52 flex gap-1 ${selected} ${
                     correct && ""
                   }`}
                   key={index}
