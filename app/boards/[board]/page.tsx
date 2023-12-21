@@ -57,6 +57,8 @@ export default function Page({
     number[]
   >([]);
 
+  const [evaluating, setEvaluating] = useState(false);
+
   const shuffle = (
     array: { alt: string; src: string }[]
   ) => {
@@ -85,6 +87,7 @@ export default function Page({
   }, []);
   useEffect(() => {
     if (selectedOne !== null && selectedTwo !== null) {
+      setEvaluating(true);
       if (
         images[selectedOne].src === images[selectedTwo].src
       ) {
@@ -101,6 +104,7 @@ export default function Page({
       setTimeout(() => {
         setSelectedOne(null);
         setSelectedTwo(null);
+        setEvaluating(false);
       }, 1000);
     }
   }, [selectedOne, selectedTwo]);
@@ -117,7 +121,7 @@ export default function Page({
         Board title
       </h1>
       <section className='relative'>
-        <div className='w-full grid grid-cols-4 gap-2 mx-auto'>
+        <div className='w-full grid grid-cols-4 gap-y-6 max-sm:gap-x-2 mx-auto px-2'>
           {images.length > 0 &&
             images.map(({ alt, src }, index) => {
               const correct = correctImages.includes(index);
@@ -130,7 +134,9 @@ export default function Page({
 
               return (
                 <button
-                  disabled={correct || !!selected}
+                  disabled={
+                    correct || !!selected || evaluating
+                  }
                   className={`relative md:w-60 w-full max-sm:h-24 rounded-lg bg-gray-300 h-40 ${selected} ${
                     correct && ""
                   }`}
