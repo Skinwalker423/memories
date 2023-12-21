@@ -112,10 +112,12 @@ export default function Page({
   };
 
   return (
-    <main className='container mx-auto w-full h-screen flex-col justify-center items-center border'>
-      <h1>Board title</h1>
+    <main className='max-w-6xl mx-auto w-full h-full flex-col justify-center items-center'>
+      <h1 className='text-2xl font-bold text-red-400 text-center'>
+        Board title
+      </h1>
       <section className='relative'>
-        <div className='w-full h-full grid grid-cols-4 gap-2 px-1'>
+        <div className='w-full grid grid-cols-4 gap-2 mx-auto'>
           {images.length > 0 &&
             images.map(({ alt, src }, index) => {
               const correct = correctImages.includes(index);
@@ -129,7 +131,7 @@ export default function Page({
               return (
                 <button
                   disabled={correct || !!selected}
-                  className={`relative w-full max-sm:h-24 rounded-md bg-red-300 h-52 flex gap-1 ${selected} ${
+                  className={`relative md:w-60 w-full max-sm:h-24 rounded-lg bg-gray-300 h-40 ${selected} ${
                     correct && ""
                   }`}
                   key={index}

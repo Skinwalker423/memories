@@ -5,9 +5,9 @@ const BoardLayout = ({
 }) => {
   return (
     <main className='w-full min-h-screen flex '>
-      <div className='w-60 min-h-screen bg-neutral-100 hidden md:block'>
+      {/* <div className='w-60 min-h-screen bg-neutral-100 hidden md:block'>
         <div>Sidebar</div>
-      </div>
+      </div> */}
       {children}
     </main>
   );
