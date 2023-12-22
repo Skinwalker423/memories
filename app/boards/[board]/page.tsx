@@ -141,7 +141,7 @@ export default function Page({
                 const selected =
                   selectedOne === index ||
                   selectedTwo === index
-                    ? "border-2 border-rose-500 flip"
+                    ? "border-2 border-rose-500"
                     : "";
 
                 return (
@@ -150,7 +150,7 @@ export default function Page({
                       correct || !!selected || evaluating
                     }
                     className={`relative md:w-40 xl:w-60 w-full max-sm:h-24 rounded-lg h-40 transition-all ease-in-out duration-1000 card ${selected} ${
-                      correct && ""
+                      (correct || selected) && "flip"
                     }`}
                     key={index}
                     onClick={() => handleImageClick(index)}
@@ -160,7 +160,7 @@ export default function Page({
                       alt={alt}
                       fill
                       sizes='(min-width: 80px)'
-                      className={`object-cover w-full front`}
+                      className={`object-cover w-full front ${!selected}`}
                     />
 
                     <Image
@@ -168,7 +168,7 @@ export default function Page({
                       alt={"stock"}
                       fill
                       sizes='(min-width: 80px)'
-                      className={`absolute top-0 object-cover w-full h-auto back ${!selected}`}
+                      className={`absolute top-0 object-cover w-full h-auto back`}
                     />
 
                     <div
