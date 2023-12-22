@@ -58,6 +58,7 @@ export default function Page({
   >([]);
 
   const [evaluating, setEvaluating] = useState(false);
+  const [resetting, setResetting] = useState(false);
 
   const shuffle = (
     array: { alt: string; src: string }[]
@@ -71,11 +72,15 @@ export default function Page({
   };
 
   const resetGame = () => {
+    setResetting(true);
     setCorrectImages([]);
     setSelectedOne(null);
     setSelectedTwo(null);
 
     shuffle(mockImages);
+    setTimeout(() => {
+      setResetting(false);
+    }, 700);
   };
 
   const handlePlayAgainClick = () => {
@@ -116,87 +121,88 @@ export default function Page({
   };
 
   return (
-    <main className='w-full h-full flex items-center space-x-2'>
-      <aside className='flex-shrink w-60 bg-neutral-100 h-full px-4 py-2 hidden lg:block'>
-        <h3>Sidebar</h3>
-        <p>Stats</p>
-        <p
-          onClick={handlePlayAgainClick}
-          className='cursor-pointer'
-        >
-          reset game
-        </p>
-      </aside>
-      <div className='flex-auto'>
+    <main className='max-w-7xl mx-auto w-full h-full flex items-center justify-between space-x-10'>
+      <aside className='flex-shrink w-60 bg-neutral-100 px-4 py-6  hidden lg:block'>
         <h1 className='text-2xl font-bold text-red-400 text-center'>
           Board title
         </h1>
-        <section className='max-w-6xl mx-auto'>
-          <div className='w-full grid grid-cols-4 gap-y-6 max-sm:gap-x-2 px-2'>
-            {images.length > 0 &&
-              images.map(({ alt, src }, index) => {
-                const correct =
-                  correctImages.includes(index);
+        <p>Stats</p>
+        <button
+          onClick={handlePlayAgainClick}
+          className='px-4 py-2 bg-green-500 rounded-xl'
+        >
+          reset game
+        </button>
+      </aside>
 
-                const selected =
-                  selectedOne === index ||
-                  selectedTwo === index
-                    ? "border-2 border-rose-500"
-                    : "";
+      <section className='flex-auto mx-auto w-full mt-5'>
+        <div className='w-full grid grid-cols-4 gap-y-6 max-sm:gap-x-2 px-2'>
+          {images.length > 0 &&
+            images.map(({ alt, src }, index) => {
+              const correct = correctImages.includes(index);
 
-                return (
-                  <button
-                    disabled={
-                      correct || !!selected || evaluating
-                    }
-                    className={`relative md:w-40 xl:w-60 w-full max-sm:h-24 rounded-lg h-40 transition-all ease-in-out duration-1000 card ${selected} ${
-                      (correct || selected) && "flip"
+              const selected =
+                selectedOne === index ||
+                selectedTwo === index
+                  ? "border-2 border-rose-500"
+                  : "";
+
+              return (
+                <button
+                  disabled={
+                    correct || !!selected || evaluating
+                  }
+                  className={`relative md:w-40 xl:w-60 w-full max-sm:h-24 rounded-lg h-40 ${
+                    resetting
+                      ? ""
+                      : "transition-all ease-in-out duration-1000"
+                  } card ${selected} ${
+                    (correct || selected) && "flip"
+                  }`}
+                  key={index}
+                  onClick={() => handleImageClick(index)}
+                >
+                  <Image
+                    src={src}
+                    alt={alt}
+                    fill
+                    sizes='(min-width: 80px)'
+                    className={`object-cover w-full rounded-lg front ${!selected}`}
+                  />
+
+                  <Image
+                    src={"/next.svg"}
+                    alt={"stock"}
+                    fill
+                    sizes='(min-width: 80px)'
+                    className={`absolute top-0 rounded-lg object-cover w-full h-auto back`}
+                  />
+
+                  <div
+                    className={`${
+                      correct
+                        ? "absolute flex justify-center items-center rounded-lg bg-gray-400 bg-opacity-75 inset-0 w-full h-full text-red-600"
+                        : "hidden"
                     }`}
-                    key={index}
-                    onClick={() => handleImageClick(index)}
                   >
-                    <Image
-                      src={src}
-                      alt={alt}
-                      fill
-                      sizes='(min-width: 80px)'
-                      className={`object-cover w-full front ${!selected}`}
-                    />
-
-                    <Image
-                      src={"/next.svg"}
-                      alt={"stock"}
-                      fill
-                      sizes='(min-width: 80px)'
-                      className={`absolute top-0 object-cover w-full h-auto back`}
-                    />
-
-                    <div
-                      className={`${
-                        correct
-                          ? "absolute flex justify-center items-center bg-gray-400 bg-opacity-75 inset-0 w-full h-full text-red-600"
-                          : "hidden"
-                      }`}
-                    >
-                      X
-                    </div>
-                  </button>
-                );
-              })}
+                    X
+                  </div>
+                </button>
+              );
+            })}
+        </div>
+        {correctImages.length === 16 && (
+          <div className='absolute z-50 bg-red-800 flex justify-center items-center flex-col gap-2 text-white w-52 h-44 md:w-[600px] md:h-80 top-1/3 left-1/4 rounded-3xl'>
+            <h2>You won!</h2>
+            <button
+              className='bg-green-700 text-white '
+              onClick={handlePlayAgainClick}
+            >
+              Play Again?
+            </button>
           </div>
-          {correctImages.length === 16 && (
-            <div className='absolute z-50 bg-red-800 flex justify-center items-center flex-col gap-2 text-white w-52 h-44 md:w-[600px] md:h-80 top-1/3 left-1/4 rounded-3xl'>
-              <h2>You won!</h2>
-              <button
-                className='bg-green-700 text-white '
-                onClick={handlePlayAgainClick}
-              >
-                Play Again?
-              </button>
-            </div>
-          )}
-        </section>
-      </div>
+        )}
+      </section>
     </main>
   );
 }
