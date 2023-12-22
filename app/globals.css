@@ -11,12 +11,12 @@
     @apply bg-gradient-to-r from-slate-600 to-slate-300 bg-clip-text text-transparent;
   }
 
-  .back {
+  .front {
     backface-visibility: hidden;
     transform: rotateY(180deg);
   }
 
-  .front {
+  .back {
     backface-visibility: hidden;
   }
 

@@ -131,7 +131,7 @@ export default function Page({
         <h1 className='text-2xl font-bold text-red-400 text-center'>
           Board title
         </h1>
-        <section>
+        <section className='max-w-6xl mx-auto'>
           <div className='w-full grid grid-cols-4 gap-y-6 max-sm:gap-x-2 px-2'>
             {images.length > 0 &&
               images.map(({ alt, src }, index) => {
@@ -155,24 +155,22 @@ export default function Page({
                     key={index}
                     onClick={() => handleImageClick(index)}
                   >
-                    <div className='w-full h-auto front'>
-                      <Image
-                        src={"/next.svg"}
-                        alt={"stock"}
-                        fill
-                        sizes='(min-width: 80px)'
-                        className={`object-cover w-full h-auto ${!selected}`}
-                      />
-                    </div>
-                    <div className='absolute top-0 w-full h-auto back'>
-                      <Image
-                        src={src}
-                        alt={alt}
-                        fill
-                        sizes='(min-width: 80px)'
-                        className={`object-cover`}
-                      />
-                    </div>
+                    <Image
+                      src={src}
+                      alt={alt}
+                      fill
+                      sizes='(min-width: 80px)'
+                      className={`object-cover w-full front`}
+                    />
+
+                    <Image
+                      src={"/next.svg"}
+                      alt={"stock"}
+                      fill
+                      sizes='(min-width: 80px)'
+                      className={`absolute top-0 object-cover w-full h-auto back ${!selected}`}
+                    />
+
                     <div
                       className={`${
                         correct
