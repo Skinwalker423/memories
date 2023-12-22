@@ -116,8 +116,8 @@ export default function Page({
   };
 
   return (
-    <main className='max-w-6xl mx-auto w-full h-full flex-col justify-center items-center'>
-      <div className='absolute w-60 left-0 bg-neutral-100 h-full hidden md:block'>
+    <main className='w-full h-full flex items-center space-x-2'>
+      <aside className='flex-shrink w-60 bg-neutral-100 h-full px-4 py-2 hidden lg:block'>
         <h3>Sidebar</h3>
         <p>Stats</p>
         <p
@@ -126,75 +126,79 @@ export default function Page({
         >
           reset game
         </p>
-      </div>
-      <h1 className='text-2xl font-bold text-red-400 text-center'>
-        Board title
-      </h1>
-      <section className='relative'>
-        <div className='w-full grid grid-cols-4 gap-y-6 max-sm:gap-x-2 mx-auto px-2'>
-          {images.length > 0 &&
-            images.map(({ alt, src }, index) => {
-              const correct = correctImages.includes(index);
+      </aside>
+      <div className='flex-auto'>
+        <h1 className='text-2xl font-bold text-red-400 text-center'>
+          Board title
+        </h1>
+        <section>
+          <div className='w-full grid grid-cols-4 gap-y-6 max-sm:gap-x-2 px-2'>
+            {images.length > 0 &&
+              images.map(({ alt, src }, index) => {
+                const correct =
+                  correctImages.includes(index);
 
-              const selected =
-                selectedOne === index ||
-                selectedTwo === index
-                  ? "border-2 border-rose-500"
-                  : "";
+                const selected =
+                  selectedOne === index ||
+                  selectedTwo === index
+                    ? "border-2 border-rose-500 flip"
+                    : "";
 
-              return (
-                <button
-                  disabled={
-                    correct || !!selected || evaluating
-                  }
-                  className={`relative md:w-60 w-full max-sm:h-24 rounded-lg bg-gray-300 h-40 ${selected} ${
-                    correct && ""
-                  }`}
-                  key={index}
-                  onClick={() => handleImageClick(index)}
-                >
-                  {selected || correct ? (
-                    <Image
-                      src={src}
-                      alt={alt}
-                      fill
-                      sizes='(min-width: 80px)'
-                      className='object-cover w-full h-auto'
-                    />
-                  ) : (
-                    <Image
-                      src={"/next.svg"}
-                      alt={"stock"}
-                      fill
-                      sizes='(min-width: 80px)'
-                      className='object-cover w-full h-auto'
-                    />
-                  )}
-                  <div
-                    className={`${
-                      correct
-                        ? "absolute flex justify-center items-center bg-gray-400 bg-opacity-75 inset-0 w-full h-full text-red-600"
-                        : "hidden"
+                return (
+                  <button
+                    disabled={
+                      correct || !!selected || evaluating
+                    }
+                    className={`relative md:w-40 xl:w-60 w-full max-sm:h-24 rounded-lg h-40 transition-all ease-in-out duration-1000 card ${selected} ${
+                      correct && ""
                     }`}
+                    key={index}
+                    onClick={() => handleImageClick(index)}
                   >
-                    X
-                  </div>
-                </button>
-              );
-            })}
-        </div>
-        {correctImages.length === 16 && (
-          <div className='absolute z-50 bg-red-800 flex justify-center items-center flex-col gap-2 text-white w-52 h-44 md:w-[600px] md:h-80 top-1/3 left-1/4 rounded-3xl'>
-            <h2>You won!</h2>
-            <button
-              className='bg-green-700 text-white '
-              onClick={handlePlayAgainClick}
-            >
-              Play Again?
-            </button>
+                    <div className='w-full h-auto front'>
+                      <Image
+                        src={"/next.svg"}
+                        alt={"stock"}
+                        fill
+                        sizes='(min-width: 80px)'
+                        className={`object-cover w-full h-auto ${!selected}`}
+                      />
+                    </div>
+                    <div className='absolute top-0 w-full h-auto back'>
+                      <Image
+                        src={src}
+                        alt={alt}
+                        fill
+                        sizes='(min-width: 80px)'
+                        className={`object-cover`}
+                      />
+                    </div>
+                    <div
+                      className={`${
+                        correct
+                          ? "absolute flex justify-center items-center bg-gray-400 bg-opacity-75 inset-0 w-full h-full text-red-600"
+                          : "hidden"
+                      }`}
+                    >
+                      X
+                    </div>
+                  </button>
+                );
+              })}
           </div>
-        )}
-      </section>
+          {correctImages.length === 16 && (
+            <div className='absolute z-50 bg-red-800 flex justify-center items-center flex-col gap-2 text-white w-52 h-44 md:w-[600px] md:h-80 top-1/3 left-1/4 rounded-3xl'>
+              <h2>You won!</h2>
+              <button
+                className='bg-green-700 text-white '
+                onClick={handlePlayAgainClick}
+              >
+                Play Again?
+              </button>
+            </div>
+          )}
+        </section>
+      </div>
     </main>
   );
 }

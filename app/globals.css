@@ -10,4 +10,21 @@
   .header-gradient {
     @apply bg-gradient-to-r from-slate-600 to-slate-300 bg-clip-text text-transparent;
   }
+
+  .back {
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+  }
+
+  .front {
+    backface-visibility: hidden;
+  }
+
+  .flip {
+    transform: rotateY(180deg);
+  }
+
+  .card {
+    transform-style: preserve-3d;
+  }
 }
