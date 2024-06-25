@@ -121,21 +121,24 @@ export default function Page({
   };
 
   return (
-    <main className='max-w-7xl mx-auto w-full h-full flex items-center justify-between'>
-      <aside className='flex-shrink w-60 bg-neutral-100 px-4 py-6  hidden lg:block'>
-        <h1 className='text-2xl font-bold text-red-400 text-center'>
-          Board title
-        </h1>
-        <p>Stats</p>
-        <button
-          onClick={handlePlayAgainClick}
-          className='px-4 py-2 bg-green-500 rounded-xl'
-        >
-          reset game
-        </button>
+    <div className='w-full h-full flex items-start justify-between'>
+      <aside className='w-fit h-screen border-r shadow-md hidden lg:block max-w-[15rem]'>
+        <div className='px-4'>
+          <h1 className='text-2xl font-bold text-red-400 text-center text-clip'>
+            Board title qdqw d qqdwqdqw dq dqq qw dqd qwd
+            qwdqdqdqdq
+          </h1>
+          <p>Stats</p>
+          <button
+            onClick={handlePlayAgainClick}
+            className='px-4 py-2 bg-green-500 rounded-xl'
+          >
+            reset game
+          </button>
+        </div>
       </aside>
 
-      <section className='relative flex-auto mx-auto w-full mt-5'>
+      <section className='max-w-6xl relative flex-auto mx-auto w-full mt-5'>
         <div className='w-full grid grid-cols-4 gap-y-6 max-sm:gap-x-2 px-2'>
           {images.length > 0 &&
             images.map(({ alt, src }, index) => {
@@ -175,13 +178,13 @@ export default function Page({
                     alt={"stock"}
                     fill
                     sizes='(min-width: 80px)'
-                    className={`absolute top-0 rounded-lg object-contain w-full h-auto back`}
+                    className={`absolute top-0 rounded-lg border shadow-sm object-contain w-full h-auto back`}
                   />
 
                   <div
                     className={`${
                       correct
-                        ? "absolute flex justify-center items-center rounded-lg bg-gray-400 bg-opacity-75 inset-0 w-full h-full transition-all duration-1000"
+                        ? "absolute flex justify-center items-center rounded-lg bg-gray-400 bg-opacity-75 inset-0 w-full h-full"
                         : "hidden"
                     }`}
                   ></div>
@@ -201,6 +204,6 @@ export default function Page({
           </div>
         )}
       </section>
-    </main>
+    </div>
   );
 }
