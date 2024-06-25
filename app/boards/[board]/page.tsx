@@ -121,7 +121,7 @@ export default function Page({
   };
 
   return (
-    <main className='max-w-7xl mx-auto w-full h-full flex items-center justify-between space-x-10'>
+    <main className='max-w-7xl mx-auto w-full h-full flex items-center justify-between'>
       <aside className='flex-shrink w-60 bg-neutral-100 px-4 py-6  hidden lg:block'>
         <h1 className='text-2xl font-bold text-red-400 text-center'>
           Board title
@@ -135,7 +135,7 @@ export default function Page({
         </button>
       </aside>
 
-      <section className='flex-auto mx-auto w-full mt-5'>
+      <section className='relative flex-auto mx-auto w-full mt-5'>
         <div className='w-full grid grid-cols-4 gap-y-6 max-sm:gap-x-2 px-2'>
           {images.length > 0 &&
             images.map(({ alt, src }, index) => {
@@ -175,24 +175,22 @@ export default function Page({
                     alt={"stock"}
                     fill
                     sizes='(min-width: 80px)'
-                    className={`absolute top-0 rounded-lg object-cover w-full h-auto back`}
+                    className={`absolute top-0 rounded-lg object-contain w-full h-auto back`}
                   />
 
                   <div
                     className={`${
                       correct
-                        ? "absolute flex justify-center items-center rounded-lg bg-gray-400 bg-opacity-75 inset-0 w-full h-full text-red-600"
+                        ? "absolute flex justify-center items-center rounded-lg bg-gray-400 bg-opacity-75 inset-0 w-full h-full transition-all duration-1000"
                         : "hidden"
                     }`}
-                  >
-                    X
-                  </div>
+                  ></div>
                 </button>
               );
             })}
         </div>
         {correctImages.length === 16 && (
-          <div className='absolute z-50 bg-red-800 flex justify-center items-center flex-col gap-2 text-white w-52 h-44 md:w-[600px] md:h-80 top-1/3 left-1/4 rounded-3xl'>
+          <div className='absolute z-50 bg-red-800 flex justify-center items-center flex-col gap-2 text-white w-52 h-44 md:w-[600px] md:h-80 left-1/4 top-1/4 rounded-3xl'>
             <h2>You won!</h2>
             <button
               className='bg-green-700 text-white '
