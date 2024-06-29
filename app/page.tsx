@@ -1,5 +1,5 @@
 import BoardCard from "./components/BoardCard";
-import Hero from "./components/Hero";
+import Hero from "./components/layout/hero/Hero";
 
 const boards = [
   {
@@ -21,7 +21,7 @@ const boards = [
 
 export default async function Home() {
   return (
-    <main className='w-full h-full justify-center'>
+    <div className='w-full h-full flex flex-col bg-neutral-50'>
       <Hero />
       <div className='flex flex-wrap gap-5 justify-center'>
         {boards.map(({ title, id, image }) => {
@@ -35,6 +35,6 @@ export default async function Home() {
           );
         })}
       </div>
-    </main>
+    </div>
   );
 }

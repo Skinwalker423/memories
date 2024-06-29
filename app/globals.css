@@ -2,9 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  --primary: black;
+}
+
 @layer components {
-  .nav-gradient {
-    @apply bg-gradient-to-b from-slate-500 to-white;
+  .bg-gradient-cyan {
+    @apply bg-gradient-to-b from-cyan-900 to-cyan-100;
+  }
+  .bg-gradient-black {
+    @apply bg-gradient-to-b from-slate-900 to-slate-400;
   }
 
   .header-gradient {
