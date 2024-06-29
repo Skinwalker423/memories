@@ -14,7 +14,7 @@ const BoardCard = ({
   id,
 }: BoardCardProps) => {
   return (
-    <li className='w-96 h-96 border bg-neutral-100 shadow-md rounded-2xl flex flex-col items-center max-sm:w-40 max-sm:h-40 overflow-hidden'>
+    <li className='w-96 h-96 border bg-neutral-200 shadow-md rounded-2xl flex flex-col items-center max-sm:w-40 max-sm:h-40 overflow-hidden'>
       <Link
         href={`/boards/${id}`}
         className='relative w-full h-1/2 rounded-2xl'
