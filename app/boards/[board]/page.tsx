@@ -178,7 +178,7 @@ export default function Page({
                     alt={"stock"}
                     fill
                     sizes='(min-width: 80px)'
-                    className={`absolute top-0 rounded-lg border shadow-sm object-contain w-full h-auto back`}
+                    className={`absolute top-0 rounded-lg border shadow-sm object-contain w-full h-auto back bg-slate-50`}
                   />
 
                   <div

@@ -1,4 +1,4 @@
-const BoardLayout = ({
+const BoardsLayout = ({
   children,
 }: {
   children: React.ReactNode;
@@ -8,4 +8,4 @@ const BoardLayout = ({
   );
 };
 
-export default BoardLayout;
+export default BoardsLayout;
