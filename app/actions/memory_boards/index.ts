@@ -1,7 +1,8 @@
 "use server";
 
-import { type MemoryBoard } from "@/app/types";
 import supabase from "@/db/supabase";
+
+import { type MemoryBoard } from "@/app/types";
 
 export const fetchBoardById = async (id: string) => {
   const { data: memory_board } = await supabase
@@ -12,6 +13,5 @@ export const fetchBoardById = async (id: string) => {
 
   if (!memory_board) return null;
 
-  console.log("memory board", memory_board);
   return memory_board[0] as MemoryBoard;
 };
