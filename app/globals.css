@@ -74,3 +74,33 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .bg-gradient-cyan {
+    @apply bg-gradient-to-b from-cyan-900 to-cyan-100;
+  }
+  .bg-gradient-black {
+    @apply bg-gradient-to-b from-slate-900 to-slate-400;
+  }
+
+  .header-gradient {
+    @apply bg-gradient-to-r from-slate-600 to-slate-300 bg-clip-text text-transparent;
+  }
+
+  .front {
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+  }
+
+  .back {
+    backface-visibility: hidden;
+  }
+
+  .flip {
+    transform: rotateY(180deg);
+  }
+
+  .card {
+    transform-style: preserve-3d;
+  }
+}

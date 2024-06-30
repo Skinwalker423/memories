@@ -3,19 +3,19 @@ import Hero from "./components/layout/hero/Hero";
 
 const boards = [
   {
+    title: "Delicious Deserts Theme",
+    id: "1",
+    image: "/images/cheesecake.jpg",
+  },
+  {
     title: "John Wick Theme",
-    id: "0",
+    id: "2",
     image: "/images/johmwick.jpg",
   },
   {
     title: "Harry Potter Theme",
-    id: "1",
+    id: "3",
     image: "/images/fakeavatar.jpg",
-  },
-  {
-    title: "Delicious Deserts Theme",
-    id: "2",
-    image: "/images/cheesecake.jpg",
   },
 ];
 
