@@ -3,51 +3,6 @@ import { useEffect, useState } from "react";
 
 import Image from "next/image";
 
-// const mockImages = [
-//   {
-//     alt: "wick",
-//     src: "/images/johmwick.jpg",
-//   },
-//   {
-//     alt: "cheesecake",
-//     src: "/images/cheesecake.jpg",
-//   },
-//   {
-//     alt: "curry",
-//     src: "/images/curry.jpg",
-//   },
-//   {
-//     alt: "skinwalker",
-//     src: "/images/skinwalker.jpg",
-//   },
-//   {
-//     alt: "harry potter",
-//     src: "/images/fakeavatar.jpg",
-//   },
-//   {
-//     alt: "brisket",
-//     src: "/images/brisket.jpeg",
-//   },
-//   {
-//     alt: "girl",
-//     src: "/images/avatar.webp",
-//   },
-//   {
-//     alt: "ramen",
-//     src: "/images/ramen.jpg",
-//   },
-// ];
-const mockImages = [
-  "/images/johmwick.jpg",
-  "/images/cheesecake.jpg",
-  "/images/curry.jpg",
-  "/images/skinwalker.jpg",
-  "/images/brisket.jpeg",
-  "/images/brisket.jpeg",
-  "/images/avatar.webp",
-  "/images/ramen.jpg",
-];
-
 interface MemoryGameProps {
   boardImages: string[];
   title: string;
@@ -57,9 +12,8 @@ export function MemoryGame({
   boardImages,
   title,
 }: MemoryGameProps) {
-  const [images, setImages] = useState(
-    boardImages || mockImages
-  );
+  console.log("b-images props", boardImages, title);
+  const [images, setImages] = useState(boardImages);
 
   const [selectedOne, setSelectedOne] = useState<
     number | null
@@ -73,9 +27,6 @@ export function MemoryGame({
 
   const [evaluating, setEvaluating] = useState(false);
   const [resetting, setResetting] = useState(false);
-
-  if (images.length !== 8)
-    return <div>Not enough images to form a game</div>;
 
   const shuffle = (array: string[]) => {
     const newArr = [...array, ...array];
