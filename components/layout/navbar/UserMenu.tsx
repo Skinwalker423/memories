@@ -3,7 +3,7 @@
 import { signIn, signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 
-const UserMenu = () => {
+export const UserMenu = () => {
   const session = useSession();
   return (
     <div className='flex gap-3 items-center z-50'>
@@ -25,5 +25,3 @@ const UserMenu = () => {
     </div>
   );
 };
-
-export default UserMenu;

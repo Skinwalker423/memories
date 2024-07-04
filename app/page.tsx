@@ -1,5 +1,5 @@
-import BoardCard from "./components/BoardCard";
-import Hero from "./components/layout/hero/Hero";
+import Hero from "@/components/layout/hero/Hero";
+import BoardCard from "@/components/memory_game/BoardCard";
 
 const boards = [
   {

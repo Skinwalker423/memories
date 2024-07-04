@@ -1,5 +1,5 @@
-import UserMenu from "../../user/UserMenu";
 import { Logo } from "./Logo";
+import { UserMenu } from "./UserMenu";
 
 const Navbar = () => {
   return (
