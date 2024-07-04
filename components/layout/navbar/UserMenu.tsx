@@ -1,5 +1,5 @@
-import { auth, signOut } from "@/auth";
-import { SignIn } from "@/components/auth/SignIn";
+import { auth } from "@/auth";
+import { SignInWithGoogle } from "@/components/auth/SignIn";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,21 +13,23 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar";
-import { Lightbulb, LogOut, Settings } from "lucide-react";
+import { Lightbulb, Settings } from "lucide-react";
 import Link from "next/link";
+import { SignOut } from "@/components/auth/SignOut";
 
 export const UserMenu = async () => {
   const session = await auth();
+  console.log("session", session);
   return (
     <div className='flex gap-3 items-center z-50'>
       {!session?.user ? (
-        <SignIn />
+        <SignInWithGoogle />
       ) : (
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Avatar>
               <AvatarImage src={session.user.image || ""} />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarFallback>M</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent className='w-56' align='end'>
@@ -35,19 +37,20 @@ export const UserMenu = async () => {
               My Account
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <Link href={"/"}>
+            <Link href={"/boards/create"}>
               <DropdownMenuItem className='flex justify-start items-center gap-3'>
                 <Lightbulb /> <span>Create Memory</span>
               </DropdownMenuItem>
             </Link>
-            <DropdownMenuItem className='flex justify-start items-center gap-3'>
-              <Settings /> <span>Settings</span>
-            </DropdownMenuItem>
+            <Link href={"/dashboard"}>
+              <DropdownMenuItem className='flex justify-start items-center gap-3'>
+                <Settings /> <span>Dashboard</span>
+              </DropdownMenuItem>
+            </Link>
 
             <DropdownMenuSeparator />
-            <DropdownMenuItem className='bg-destructive text-destructive-foreground flex justify-start items-center gap-3 hover:bg-destructive/80'>
-              <LogOut />
-              <span>Sign out</span>
+            <DropdownMenuItem className='bg-destructive flex justify-start items-center gap-3 hover:bg-destructive/80'>
+              <SignOut />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
