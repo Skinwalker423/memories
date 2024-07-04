@@ -2,8 +2,8 @@ import { notFound } from "next/navigation";
 
 import { fetchBoardById } from "@/app/actions/memory_boards";
 
-import { MemoryGame } from "@/app/components/memory_game/MemoryGame";
 import { mockImages } from "@/app/constants";
+import { MemoryGame } from "@/components/memory_game/MemoryGame";
 
 export default async function BoardPage({
   params,

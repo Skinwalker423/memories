@@ -1,7 +1,7 @@
 import React from "react";
 
-const page = () => {
+const AllBoardsPage = () => {
   return <div>ALL BOARDS</div>;
 };
 
-export default page;
+export default AllBoardsPage;
