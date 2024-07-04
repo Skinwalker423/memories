@@ -1,14 +1,15 @@
-import { signInWithGoogle } from "@/app/actions/users";
+import Link from "next/link";
 import { Button } from "../ui/button";
 
-export function SignIn() {
-  const onSubmit = async () => {
-    await signInWithGoogle();
-  };
+export function SignInWithGoogle() {
+  // const onSubmit = async () => {
+  //   "use server";
+  //   await signIn();
+  // };
 
   return (
-    <form action={onSubmit}>
-      <Button type='submit'>Signin with Google</Button>
-    </form>
+    <Button className='bg-yellow-500' type='submit'>
+      <Link href={"/auth/login"}>Signin</Link>
+    </Button>
   );
 }
