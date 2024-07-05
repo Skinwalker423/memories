@@ -4,16 +4,13 @@ import React from "react";
 
 export const Logo = () => {
   return (
-    <Link
-      href={"/"}
-      className='z-50 flex items-center text-slate-50 text-2xl'
-    >
-      Logo Text
+    <Link href={"/"} className='z-50 flex items-center'>
       <Image
-        src={"/next.svg"}
+        src={"/memories.png"}
         alt='Memories logo'
-        width={100}
-        height={48}
+        className='w-auto h-10 sm:h-12'
+        width={200}
+        height={64}
       />
     </Link>
   );
