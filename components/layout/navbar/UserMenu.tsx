@@ -1,5 +1,3 @@
-import { auth } from "@/auth";
-import { SignInWithGoogle } from "@/components/auth/SignIn";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,19 +14,26 @@ import {
 import { Lightbulb, Settings } from "lucide-react";
 import Link from "next/link";
 import { SignOut } from "@/components/auth/SignOut";
+import { createClient } from "@/utils/supabase/server";
+import { Button } from "@/components/ui/button";
 
 export const UserMenu = async () => {
-  const session = await auth();
-  console.log("session", session);
+  const supabase = await createClient();
+  const user = await supabase.auth.getUser();
+
   return (
     <div className='flex gap-3 items-center z-50'>
-      {!session?.user ? (
-        <SignInWithGoogle />
+      {!user.data ? (
+        <Button asChild>
+          <Link href={"/login"}>Sign In</Link>
+        </Button>
       ) : (
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Avatar>
-              <AvatarImage src={session.user.image || ""} />
+              <AvatarImage
+                src={"/images/fakeavatar.jpg" || ""}
+              />
               <AvatarFallback>M</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
@@ -58,3 +63,6 @@ export const UserMenu = async () => {
     </div>
   );
 };
+
+("http://localhost:3000/api/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F");
+("http://localhost:3000/auth/login?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F");

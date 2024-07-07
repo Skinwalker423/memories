@@ -6,7 +6,7 @@ const Hero = () => {
     <section className='w-full h-[calc(100vh-2.5rem)] pt-10 sm:pt-20 '>
       <div className='absolute inset-0 bg-gradient-black' />
       <div className='absolute w-full h-full top-0 left-0 flex flex-col justify-center items-center gap-12 px-5'>
-        <h1 className='w-full h-fit flex flex-wrap justify-start sm:justify-center  text-5xl sm:text-7xl md:text-8xl text-slate-50 font-bold z-50 text-left sm:text-center'>
+        <h1 className='max-w-6xl h-fit flex flex-wrap justify-start sm:justify-center  text-5xl sm:text-7xl md:text-8xl text-slate-50 font-bold z-50 text-left sm:text-center'>
           <span>Unleash Your &nbsp;</span>
           <span className='text-yellow-500'>
             {" "}
@@ -16,11 +16,11 @@ const Hero = () => {
           <span>Challenge.</span>
         </h1>
         <p className='max-w-lg text-slate-50 z-50 text-base sm:text-lg xl:text-xl'>
-          Picture memory games have been a beloved pastime
-          for generations. Now, you can take the fun to a
-          whole new level by using any pictures you like -
-          family photos, vacation snapshots, artwork, even
-          memes!
+          Memory been a beloved pastime for generations.
+          Now, you can create and share your customized game
+          by using any pictures you like - family photos,
+          vacation snapshots, artwork, even memes. Find and
+          play themed games that others have designed!
         </p>
         <div className='z-50 space-x-3'>
           <a
