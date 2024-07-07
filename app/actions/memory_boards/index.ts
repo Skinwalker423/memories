@@ -1,10 +1,10 @@
 "use server";
 
-import supabase from "@/db/supabase";
-
 import { type MemoryBoard } from "@/app/types";
+import { createClient } from "@/utils/supabase/server";
 
 export const fetchBoardById = async (id: string) => {
+  const supabase = await createClient();
   const { data: memory_board } = await supabase
     .from("memory_board")
     .select("*")
