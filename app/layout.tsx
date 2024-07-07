@@ -23,7 +23,7 @@ export default async function RootLayout({
         <NextAuthProvider>
           <main className='w-full h-screen flex flex-col'>
             <div className=''>
-              <div className='py-3 sm:px-20'>
+              <div className='py-3 sm:px-20 bg-gradient-black'>
                 <Navbar />
               </div>
               <div>{children}</div>
