@@ -18,12 +18,12 @@ import { createClient } from "@/utils/supabase/server";
 import { Button } from "@/components/ui/button";
 
 export const UserMenu = async () => {
-  const supabase = await createClient();
+  const supabase = createClient();
   const user = await supabase.auth.getUser();
 
   return (
     <div className='flex gap-3 items-center z-50'>
-      {!user.data ? (
+      {!user.data.user ? (
         <Button asChild>
           <Link href={"/login"}>Sign In</Link>
         </Button>
@@ -32,7 +32,12 @@ export const UserMenu = async () => {
           <DropdownMenuTrigger>
             <Avatar>
               <AvatarImage
-                src={"/images/fakeavatar.jpg" || ""}
+                src={
+                  user.data.user?.user_metadata?.avatar_url
+                    ? user.data.user.user_metadata
+                        .avatar_url
+                    : "/images/fakeavatar.jpg" || ""
+                }
               />
               <AvatarFallback>M</AvatarFallback>
             </Avatar>
