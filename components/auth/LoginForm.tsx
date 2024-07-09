@@ -80,7 +80,7 @@ export function LoginForm() {
 
   return (
     <Form {...form}>
-      <form className='space-y-8 max-w-3xl mx-auto border shadow-xl p-10 rounded-lg'>
+      <form className='w-full sm:w-[500px] space-y-8 border shadow-xl p-10 rounded-lg'>
         <FormField
           control={form.control}
           name='email'
@@ -114,7 +114,7 @@ export function LoginForm() {
             </FormItem>
           )}
         />
-        <div className='flex gap-3'>
+        <div className='flex gap-3 flex-wrap'>
           <Button
             size={"lg"}
             formAction={handleLoginSubmit}
@@ -130,7 +130,7 @@ export function LoginForm() {
           </Button>
         </div>
         {message && (
-          <p className='w-full h-20 flex justify-center items-center bg-green-100 text-green-600'>
+          <p className='w-full min-h-20 flex justify-center items-center bg-green-100 text-green-600 px-5 py-2'>
             {message}
           </p>
         )}
