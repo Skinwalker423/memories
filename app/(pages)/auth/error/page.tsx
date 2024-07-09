@@ -7,6 +7,7 @@ import {
 
 enum Error {
   Configuration = "Configuration",
+  signUpError = "SignUpError",
 }
 
 const errorMap = {
@@ -17,6 +18,15 @@ const errorMap = {
       code:{" "}
       <code className='text-xs bg-slate-100 p-1 rounded-sm'>
         Configuration
+      </code>
+    </p>
+  ),
+  [Error.signUpError]: (
+    <p>
+      There was a problem signing up. Please contact us if
+      this error persists. Unique error code:{" "}
+      <code className='text-xs bg-slate-100 p-1 rounded-sm'>
+        Sign Up Error
       </code>
     </p>
   ),
