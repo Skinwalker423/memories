@@ -10,10 +10,17 @@ import { loginFormSchema } from "@/lib/schemas";
 export async function login(formData: FormData) {
   const supabase = createClient();
 
-  const formValues = loginFormSchema.safeParse(formData);
+  const formattedFormData = {
+    email: formData.get("email"),
+    password: formData.get("password"),
+  };
+
+  const formValues = loginFormSchema.safeParse(
+    formattedFormData
+  );
 
   if (!formValues.success)
-    return { error: formValues.error.message };
+    return { error: formValues.error.issues };
 
   // type-casting here for convenience
   // in practice, you should validate your inputs
@@ -36,22 +43,39 @@ export async function login(formData: FormData) {
 
 export async function signup(formData: FormData) {
   const supabase = createClient();
-
+  console.log("form action went through");
   // type-casting here for convenience
   // in practice, you should validate your inputs
+  const formDataFormatted = {
+    email: formData.get("email"),
+    password: formData.get("password"),
+  };
+  const formValues = loginFormSchema.safeParse(
+    formDataFormatted
+  );
+
+  if (!formValues.success) {
+    return {
+      error: formValues.error.issues,
+    };
+  }
+
   const data = {
-    email: formData.get("email") as string,
-    password: formData.get("password") as string,
+    email: formValues.data.email,
+    password: formValues.data.password,
   };
 
   const { error } = await supabase.auth.signUp(data);
 
   if (error) {
-    redirect("/auth/error");
+    redirect(`/auth/error?error=SignUpError`);
   }
 
   revalidatePath("/", "layout");
-  redirect("/");
+  return {
+    message:
+      "Thank You. Please check your email to confirm your account",
+  };
 }
 
 export const signInWithGoogle = async () => {
