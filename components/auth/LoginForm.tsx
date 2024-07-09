@@ -19,7 +19,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 
 export function LoginForm() {
-  const [errors, setErrors] = useState<ZodIssue[]>([]);
+  const [message, setMessage] = useState("");
   // 1. Define your form.
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
@@ -43,7 +43,6 @@ export function LoginForm() {
     const res = await login(formData);
 
     if (res.error) {
-      setErrors(res.error);
       res.error.forEach((err) => {
         if (
           (err.path.length && err.path[0] === "email") ||
@@ -61,7 +60,6 @@ export function LoginForm() {
     const res = await signup(formData);
 
     if (res.error) {
-      setErrors(res.error);
       res.error.forEach((err) => {
         if (
           (err.path.length && err.path[0] === "email") ||
@@ -73,11 +71,16 @@ export function LoginForm() {
         }
       });
     }
+
+    if (res.message) {
+      setMessage(res.message);
+      form.reset();
+    }
   };
 
   return (
     <Form {...form}>
-      <form className='space-y-8 max-w-3xl mx-auto bg-slate-50 p-10 rounded-lg'>
+      <form className='space-y-8 max-w-3xl mx-auto border shadow-xl p-10 rounded-lg'>
         <FormField
           control={form.control}
           name='email'
@@ -111,15 +114,26 @@ export function LoginForm() {
             </FormItem>
           )}
         />
-        <Button formAction={handleLoginSubmit}>
-          Sign In
-        </Button>
-        <Button
-          variant={"outline"}
-          formAction={handleSignupSubmit}
-        >
-          Sign Up
-        </Button>
+        <div className='flex gap-3'>
+          <Button
+            size={"lg"}
+            formAction={handleLoginSubmit}
+          >
+            Sign In
+          </Button>
+          <Button
+            size={"lg"}
+            variant={"outline"}
+            formAction={handleSignupSubmit}
+          >
+            Sign Up
+          </Button>
+        </div>
+        {message && (
+          <p className='w-full h-20 flex justify-center items-center bg-green-100 text-green-600'>
+            {message}
+          </p>
+        )}
       </form>
     </Form>
   );
