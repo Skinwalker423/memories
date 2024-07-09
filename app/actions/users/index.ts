@@ -5,15 +5,21 @@ import { redirect } from "next/navigation";
 import { signIn, signOut } from "@/auth";
 
 import { createClient } from "@/utils/supabase/server";
+import { loginFormSchema } from "@/lib/schemas";
 
 export async function login(formData: FormData) {
   const supabase = createClient();
 
+  const formValues = loginFormSchema.safeParse(formData);
+
+  if (!formValues.success)
+    return { error: formValues.error.message };
+
   // type-casting here for convenience
   // in practice, you should validate your inputs
   const data = {
-    email: formData.get("email") as string,
-    password: formData.get("password") as string,
+    email: formValues.data.email,
+    password: formValues.data.password,
   };
 
   const { error } = await supabase.auth.signInWithPassword(
@@ -21,7 +27,7 @@ export async function login(formData: FormData) {
   );
 
   if (error) {
-    redirect("/error");
+    redirect("/auth/error");
   }
 
   revalidatePath("/", "layout");
