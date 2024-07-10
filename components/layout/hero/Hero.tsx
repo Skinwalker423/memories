@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Hero = () => {
@@ -23,18 +24,18 @@ const Hero = () => {
           play themed games that others have designed!
         </p>
         <div className='z-50 space-x-3'>
-          <a
+          <Link
             href='/boards'
             className='bg-yellow-500 px-3 py-3 sm:px-4 rounded-lg text-yellow-50 text-base sm:text-xl'
           >
             Browse Memories
-          </a>
-          <a
-            href='/boards'
+          </Link>
+          <Link
+            href='/boards/create'
             className='border border-yellow-400 bg-transparent px-3 py-3 sm:px-4 rounded-lg text-white text-base sm:text-xl'
           >
             Create a memory
-          </a>
+          </Link>
         </div>
       </div>
       <div>
