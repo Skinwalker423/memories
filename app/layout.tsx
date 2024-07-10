@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import NextAuthProvider from "./context/NextAuthProvider";
 import Navbar from "@/components/layout/navbar/Navbar";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default async function RootLayout({
               <div>Footer</div>
             </div>
           </main>
+          <Toaster />
         </NextAuthProvider>
       </body>
     </html>
