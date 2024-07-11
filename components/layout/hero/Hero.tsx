@@ -31,7 +31,7 @@ const Hero = () => {
             Browse Memories
           </Link>
           <Link
-            href='/boards/create'
+            href='/dashboard'
             className='border border-yellow-400 bg-transparent px-3 py-3 sm:px-4 rounded-lg text-white text-base sm:text-xl'
           >
             Create a memory
