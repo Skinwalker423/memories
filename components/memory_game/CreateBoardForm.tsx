@@ -7,12 +7,8 @@ import {
   Form,
   FormField,
   FormItem,
-  FormMessage,
 } from "@/components/ui/form";
-import {
-  Button,
-  buttonVariants,
-} from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { createBoardTitle } from "@/app/actions/memory_boards";
@@ -32,21 +28,17 @@ const CreateBoardForm = () => {
   });
 
   const onSubmit = async (data: CardFormType) => {
-    console.log("test");
-
     const res = await createBoardTitle(data.title);
 
     if (res.error) {
       toast.error(res.error, {
         duration: 10000,
       });
-    } else {
-      toast.success(
-        "Title created. Now time to add images!",
-        {
-          duration: 10000,
-        }
-      );
+    }
+
+    if (res.message) {
+      form.reset();
+      toast.success(res.message);
     }
   };
 
@@ -54,10 +46,10 @@ const CreateBoardForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='relative w-full grid gap-2 h-12 '
+        className='relative grid gap-2'
       >
         <div
-          className={`w-full flex items-start gap-x-2 rounded-md outline outline-1 outline-border px-2 pb-1`}
+          className={`max-w-2xl flex items-start gap-x-2 rounded-md outline outline-1 outline-border px-2 pb-1`}
         >
           <FormField
             control={form.control}
@@ -82,7 +74,12 @@ const CreateBoardForm = () => {
             )}
           </div>
         )}
-        <Button type='submit' className='h-8 w-fit'>
+        <Button
+          disabled={form.formState.isSubmitting}
+          variant={"destructive"}
+          type='submit'
+          className='h-8 w-fit'
+        >
           Create Board Title
         </Button>
       </form>
