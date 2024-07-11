@@ -2,6 +2,7 @@
 
 import { type MemoryBoard } from "@/app/types";
 import { createClient } from "@/utils/supabase/server";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export const fetchBoardById = async (id: string) => {
@@ -36,6 +37,24 @@ export const createBoardTitle = async (title: string) => {
       error: error.message,
     };
   }
+  revalidatePath("/dashboard/myBoards", "page");
+  return {
+    message:
+      "successfully created a project. Now add some images!",
+  };
+};
 
-  redirect("/dashboard");
+export const getAllUserBoards = async (userId: string) => {
+  const supabase = createClient();
+  console.log("userId", userId);
+  const { data, error } = await supabase
+    .from("memory_board")
+    .select("*")
+    .eq("userId", userId);
+
+  if (error) {
+    console.error(error.message);
+  }
+
+  return data as MemoryBoard[] | null;
 };
