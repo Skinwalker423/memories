@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import {
   Form,
+  FormControl,
   FormField,
   FormItem,
 } from "@/components/ui/form";
@@ -56,11 +57,13 @@ const CreateBoardForm = () => {
             name='title'
             render={({ field }) => (
               <FormItem className='p-0 w-full'>
-                <Input
-                  {...field}
-                  className={`border focus-visible:ring-0 border-none w-full`}
-                  placeholder='Title of your Memory board'
-                />
+                <FormControl>
+                  <Input
+                    {...field}
+                    className={`border focus-visible:ring-0 border-none w-full`}
+                    placeholder='Title of your new Memory board idea'
+                  />
+                </FormControl>
               </FormItem>
             )}
           />
@@ -76,9 +79,10 @@ const CreateBoardForm = () => {
         )}
         <Button
           disabled={form.formState.isSubmitting}
-          variant={"destructive"}
+          variant={"secondary"}
           type='submit'
-          className='h-8 w-fit'
+          size={"lg"}
+          className='py-3 text-lg w-fit'
         >
           Create Board Title
         </Button>
