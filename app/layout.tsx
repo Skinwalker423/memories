@@ -28,7 +28,6 @@ export default async function RootLayout({
                 <Navbar />
               </div>
               <div>{children}</div>
-              <div>Footer</div>
             </div>
           </main>
           <Toaster />
