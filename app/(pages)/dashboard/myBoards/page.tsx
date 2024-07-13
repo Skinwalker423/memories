@@ -29,7 +29,7 @@ const MyBoardsPage = async () => {
         <CreateBoardForm />
       </div>
       <div className='space-y-5'>
-        <h3 className='text-3xl font-semibold text-primary'>
+        <h3 className='text-3xl font-semibold text-'>
           Memories
         </h3>
         <div>
@@ -43,7 +43,7 @@ const MyBoardsPage = async () => {
                     className='bg-neutral-50 flex flex-col justify-between'
                     key={board.id}
                   >
-                    <div className='flex items-center justify-between'>
+                    <div className='flex items-center justify-between p-2'>
                       <h4>{board.title}</h4>
                       <span>
                         {isGameComplete ? (
