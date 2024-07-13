@@ -34,12 +34,21 @@ const CreateBoardForm = () => {
     if (res.error) {
       toast.error(res.error, {
         duration: 10000,
+        style: {
+          backgroundColor: "red",
+          color: "white",
+        },
       });
     }
 
     if (res.message) {
       form.reset();
-      toast.success(res.message);
+      toast.success(res.message, {
+        style: {
+          backgroundColor: "green",
+          color: "white",
+        },
+      });
     }
   };
 
@@ -84,7 +93,7 @@ const CreateBoardForm = () => {
           size={"lg"}
           className='py-3 text-lg w-fit'
         >
-          Create Board Title
+          Create New Memory
         </Button>
       </form>
     </Form>
