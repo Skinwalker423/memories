@@ -61,7 +61,7 @@ const MyBoardPage = async ({
               </li>
             );
           })}
-          {isBoardComplete && (
+          {!isBoardComplete && (
             <div className='w-[200px] h-[200px] bg-neutral-200 flex flex-col justify-center items-center rounded-xl'>
               <h3>Add Image</h3>
               <ImageIcon size={100} />
@@ -69,13 +69,17 @@ const MyBoardPage = async ({
           )}
         </ul>
       </div>
-      <div className='flex justify-between'>
-        <Button asChild size={"lg"} variant={"secondary"}>
-          <Link href={`/boards/${board.id}`}>
-            View Game
-          </Link>
+      <div className='flex justify-end gap-5 items-center'>
+        {isBoardComplete && (
+          <Button asChild size={"lg"} variant={"secondary"}>
+            <Link href={`/boards/${board.id}`}>
+              View Game
+            </Link>
+          </Button>
+        )}
+        <Button size={"lg"} variant={"destructive"}>
+          Delete Game
         </Button>
-        <Button variant={"destructive"}>Delete Game</Button>
       </div>
     </div>
   );
