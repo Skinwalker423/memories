@@ -58,3 +58,57 @@ export const getAllUserBoards = async (userId: string) => {
 
   return data as MemoryBoard[] | null;
 };
+
+export async function updateMemory(
+  image: File,
+  userId: string
+) {
+  const supabase = createClient();
+  const imageName = `${Math.random()}-${
+    image.name
+  }`.replace("/", "");
+  const imagePath = `${process.env.SUPABASE_BUCKET_BASE_URL}/${imageName}`;
+
+  const { data: currentBoard, error: imagesError } =
+    await supabase
+      .from("memory_board")
+      .select("images")
+      .eq("userId", userId);
+
+  if (imagesError)
+    return {
+      error: imagesError.message,
+    };
+
+  const updatedArray = currentBoard?.length
+    ? [...currentBoard, imagePath]
+    : [imagePath];
+
+  const { data, error } = await supabase
+    .from("memory_board")
+    .update({ images: updatedArray })
+    .eq("userId", userId)
+    .select();
+
+  if (error) {
+    console.error(error);
+    throw new Error("problem creating cabin");
+  }
+
+  if (image.name) {
+    const { error: uploadError } = await supabase.storage
+      .from("board-images")
+      .upload(imageName, image);
+
+    if (uploadError) {
+      console.error(uploadError);
+      throw new Error(
+        "problem uploading image. Try updating the image again."
+      );
+    }
+  }
+
+  return {
+    message: "successfully added an image",
+  };
+}
