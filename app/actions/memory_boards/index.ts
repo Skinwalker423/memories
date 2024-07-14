@@ -64,16 +64,11 @@ export async function updateMemory(formData: FormData) {
   const image = formData.get("file") as File;
   const userId = formData.get("userId") as string;
   const boardId = formData.get("boardId") as string;
-  console.log("image", image);
-  console.log("userId", userId);
-  console.log("boardId", boardId);
 
   const imageName = `${Math.random()}-${
     image.name
   }`.replace("/", "");
   const imagePath = `${process.env.SUPABASE_BUCKET_BASE_URL}/${imageName}`;
-
-  console.log("image name", imageName);
 
   const { data: currentBoard, error: imagesError } =
     await supabase
@@ -86,9 +81,10 @@ export async function updateMemory(formData: FormData) {
     return {
       error: imagesError.message,
     };
+  const images = currentBoard[0].images;
 
-  const updatedArray = currentBoard?.length
-    ? [...currentBoard, imagePath]
+  const updatedArray = images.length
+    ? [...images, imagePath]
     : [imagePath];
 
   const { data, error } = await supabase
@@ -113,7 +109,7 @@ export async function updateMemory(formData: FormData) {
       console.log("error", uploadError.message);
       await supabase
         .from("memory_board")
-        .update({ images: [...currentBoard] })
+        .update({ images: [...images] })
         .eq("id", boardId)
         .eq("userId", userId)
         .select();
