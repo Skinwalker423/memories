@@ -26,6 +26,7 @@ import { cn } from "@/lib/utils";
 
 import Image from "next/image";
 import { updateMemory } from "@/app/actions/memory_boards";
+import { useParams } from "next/navigation";
 
 const CardForm = z.object({
   files: z
@@ -57,6 +58,7 @@ const AddMemoryImageForm = ({
       files: null,
     },
   });
+  const { boardId }: { boardId: string } = useParams();
 
   const dropzone = {
     multiple: true,
@@ -68,8 +70,12 @@ const AddMemoryImageForm = ({
     if (data.files && data.files[0]) {
       const image = data.files[0];
       console.log("pic", image);
-      const res = { message: "test", error: "" };
-      // const res = await updateMemory(image, userId);
+      // const res = { message: "test", error: "" };
+      const formData = new FormData();
+      formData.append("file", image);
+      formData.append("userId", userId);
+      formData.append("boardId", boardId);
+      const res = await updateMemory(formData);
 
       if (res.error) {
         toast.error(res.error);
