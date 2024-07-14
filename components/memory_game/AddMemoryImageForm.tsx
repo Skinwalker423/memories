@@ -69,8 +69,6 @@ const AddMemoryImageForm = ({
   const onSubmit = async (data: CardFormType) => {
     if (data.files && data.files[0]) {
       const image = data.files[0];
-      console.log("pic", image);
-      // const res = { message: "test", error: "" };
       const formData = new FormData();
       formData.append("file", image);
       formData.append("userId", userId);
@@ -82,6 +80,7 @@ const AddMemoryImageForm = ({
       }
 
       if (res.message) {
+        form.reset();
         toast.success(res.message);
       }
     }
@@ -124,7 +123,7 @@ const AddMemoryImageForm = ({
                   </FileInput>
                   {field.value &&
                     field.value.length > 0 && (
-                      <FileUploaderContent className='absolute bottom-8 p-2  w-full -ml-3 rounded-b-none rounded-t-md flex-row gap-2 h-full'>
+                      <FileUploaderContent className='absolute bottom-20 p-2 -ml-3 rounded-b-none rounded-t-md flex-row gap-2 max-h-[200px] w-full'>
                         {field.value.map((file, i) => (
                           <FileUploaderItem
                             key={i}
@@ -132,14 +131,14 @@ const AddMemoryImageForm = ({
                             aria-roledescription={`file ${
                               i + 1
                             } containing ${file.name}`}
-                            className='p-0 size-20'
+                            className='p-0 w-[200px] h-[200px]'
                           >
                             <Image
                               src={URL.createObjectURL(
                                 file
                               )}
                               alt={file.name}
-                              className='object-cover rounded-md'
+                              className='rounded-md w-[200px] h-[200px] object-cover'
                               width={200}
                               height={200}
                             />
@@ -161,8 +160,14 @@ const AddMemoryImageForm = ({
             )}
           </div>
         )}
-        <Button type='submit' className='h-8 w-fit'>
-          Confirm Image
+        <Button
+          disabled={form.formState.isSubmitting}
+          type='submit'
+          className='h-8 w-fit'
+        >
+          {form.formState.isSubmitting
+            ? "adding..."
+            : "Confirm Image"}
         </Button>
       </form>
     </Form>
