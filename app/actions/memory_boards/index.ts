@@ -59,20 +59,27 @@ export const getAllUserBoards = async (userId: string) => {
   return data as MemoryBoard[] | null;
 };
 
-export async function updateMemory(
-  image: File,
-  userId: string
-) {
+export async function updateMemory(formData: FormData) {
   const supabase = createClient();
+  const image = formData.get("file") as File;
+  const userId = formData.get("userId") as string;
+  const boardId = formData.get("boardId") as string;
+  console.log("image", image);
+  console.log("userId", userId);
+  console.log("boardId", boardId);
+
   const imageName = `${Math.random()}-${
     image.name
   }`.replace("/", "");
   const imagePath = `${process.env.SUPABASE_BUCKET_BASE_URL}/${imageName}`;
 
+  console.log("image name", imageName);
+
   const { data: currentBoard, error: imagesError } =
     await supabase
       .from("memory_board")
       .select("images")
+      .eq("id", boardId)
       .eq("userId", userId);
 
   if (imagesError)
@@ -87,27 +94,37 @@ export async function updateMemory(
   const { data, error } = await supabase
     .from("memory_board")
     .update({ images: updatedArray })
+    .eq("id", boardId)
     .eq("userId", userId)
     .select();
 
   if (error) {
     console.error(error);
-    throw new Error("problem creating cabin");
+    throw new Error("problem adding image");
   }
 
   if (image.name) {
     const { error: uploadError } = await supabase.storage
-      .from("board-images")
+      .from("board_images")
       .upload(imageName, image);
 
     if (uploadError) {
-      console.error(uploadError);
+      console.error(uploadError.message);
+      console.log("error", uploadError.message);
+      await supabase
+        .from("memory_board")
+        .update({ images: [...currentBoard] })
+        .eq("id", boardId)
+        .eq("userId", userId)
+        .select();
+
       throw new Error(
         "problem uploading image. Try updating the image again."
       );
     }
   }
 
+  revalidatePath(`/dashboard/myBoards/${boardId}`);
   return {
     message: "successfully added an image",
   };
