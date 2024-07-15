@@ -17,6 +17,19 @@ import { SignOut } from "@/components/auth/SignOut";
 import { createClient } from "@/utils/supabase/server";
 import { Button } from "@/components/ui/button";
 
+const userMenuLinksConfig = [
+  {
+    label: "Create Memory",
+    href: "/dashboard/myBoards",
+    icon: <Lightbulb />,
+  },
+  {
+    label: "Dashboard",
+    href: "/dashboard",
+    icon: <Settings />,
+  },
+];
+
 export const UserMenu = async () => {
   const supabase = createClient();
   const user = await supabase.auth.getUser();
@@ -47,16 +60,18 @@ export const UserMenu = async () => {
               My Account
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <Link href={"/boards/create"}>
-              <DropdownMenuItem className='flex justify-start items-center gap-3'>
-                <Lightbulb /> <span>Create Memory</span>
-              </DropdownMenuItem>
-            </Link>
-            <Link href={"/dashboard"}>
-              <DropdownMenuItem className='flex justify-start items-center gap-3'>
-                <Settings /> <span>Dashboard</span>
-              </DropdownMenuItem>
-            </Link>
+
+            {userMenuLinksConfig.map(
+              ({ href, icon, label }) => {
+                return (
+                  <Link key={label} href={href}>
+                    <DropdownMenuItem className='flex justify-start items-center gap-3'>
+                      {icon} <span>{label}</span>
+                    </DropdownMenuItem>
+                  </Link>
+                );
+              }
+            )}
 
             <DropdownMenuSeparator />
             <DropdownMenuItem className='bg-destructive flex justify-start items-center gap-3 hover:bg-destructive/80'>
