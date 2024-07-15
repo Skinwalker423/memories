@@ -15,6 +15,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { MyBoardMemoryCard } from "@/components/cards/MyBoardMemoryCard";
 
 const MyBoardsPage = async () => {
   const user = await getCurrentUser();
@@ -23,76 +24,28 @@ const MyBoardsPage = async () => {
   const boards = await getAllUserBoards(user.id);
 
   return (
-    <div className='max-w-6xl mx-auto'>
-      <h1 className='text-7xl text-center'>My Boards</h1>
+    <div className='max-w-6xl mx-auto p-10'>
+      <h1 className='text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center'>
+        My Boards
+      </h1>
       <div className='my-20'>
         <CreateBoardForm />
       </div>
-      <div className='space-y-5'>
+      <div className='flex flex-col gap-4 justify-center'>
         <h3 className='text-3xl font-semibold text-'>
           Memories
         </h3>
         <div>
           {boards && (
-            <ul className='flex flex-wrap gap-10'>
+            <ul className='flex flex-wrap gap-10 justify-center sm:justify-normal'>
               {boards.map((board) => {
                 const isGameComplete =
                   board.images.length === 8;
                 return (
-                  <li
-                    className='bg-neutral-50 flex flex-col justify-between'
-                    key={board.id}
-                  >
-                    <div className='flex items-center justify-between p-2'>
-                      <h4>{board.title}</h4>
-                      <span>
-                        {isGameComplete ? (
-                          <TooltipProvider>
-                            <Tooltip>
-                              <TooltipTrigger>
-                                <CheckCircle className='stroke-green-500' />
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>
-                                  Completed Memory. Ready to
-                                  play.
-                                </p>
-                              </TooltipContent>
-                            </Tooltip>
-                          </TooltipProvider>
-                        ) : (
-                          <TooltipProvider>
-                            <Tooltip>
-                              <TooltipTrigger>
-                                <TriangleAlert className='stroke-yellow-500' />
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>
-                                  Not complete. Need to add
-                                  more images
-                                </p>
-                              </TooltipContent>
-                            </Tooltip>
-                          </TooltipProvider>
-                        )}
-                      </span>
-                    </div>
-                    <Image
-                      src={board.images[0] || "/next.svg"}
-                      alt={`image representing the memory board of ${board.title}`}
-                      width={200}
-                      height={200}
-                    />
-                    <Button asChild>
-                      <Link
-                        href={`/dashboard/myBoards/${board.id}`}
-                      >
-                        {isGameComplete
-                          ? "Customize"
-                          : "Add Images"}
-                      </Link>
-                    </Button>
-                  </li>
+                  <MyBoardMemoryCard
+                    board={board}
+                    isGameComplete={isGameComplete}
+                  />
                 );
               })}
             </ul>
