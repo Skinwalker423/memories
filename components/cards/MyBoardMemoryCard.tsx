@@ -28,11 +28,7 @@ export const MyBoardMemoryCard = ({
 }: MyBoardMemoryCardProps) => {
   const { id, images, title } = board;
   return (
-    <Card
-      role='listitem'
-      key={id}
-      className='w-[300px] h-fit'
-    >
+    <Card role='listitem' className='w-[300px] h-fit'>
       <CardHeader>
         <CardTitle className='flex items-center justify-between gap-4 h-12 text-clip'>
           {title}

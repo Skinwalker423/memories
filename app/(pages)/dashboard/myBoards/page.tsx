@@ -43,6 +43,7 @@ const MyBoardsPage = async () => {
                   board.images.length === 8;
                 return (
                   <MyBoardMemoryCard
+                    key={board.id}
                     board={board}
                     isGameComplete={isGameComplete}
                   />
