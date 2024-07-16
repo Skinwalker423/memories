@@ -60,12 +60,18 @@ export async function signup(formData: FormData) {
     };
   }
 
-  const data = {
-    email: formValues.data.email,
-    password: formValues.data.password,
-  };
+  const email = formValues.data.email;
+  const password = formValues.data.password;
 
-  const { error } = await supabase.auth.signUp(data);
+  const { error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        allowedBoards: 1,
+      },
+    },
+  });
 
   if (error) {
     redirect(`/auth/error?error=SignUpError`);
