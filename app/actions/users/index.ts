@@ -96,3 +96,26 @@ export const getCurrentUser = async () => {
   const response = await supabase.auth.getUser();
   return response.data.user;
 };
+
+export const getExtendedUser = async (userId: string) => {
+  const supabase = createClient();
+  console.log("user id", userId);
+  const { data, error } = await supabase
+    .from("user")
+    .select("*")
+    .eq("id", userId)
+    .limit(1);
+
+  if (error) {
+    console.error(error.message);
+    return {
+      error: error.message,
+    };
+  }
+
+  console.log("data", data);
+
+  if (!data) return null;
+
+  return data[0];
+};
