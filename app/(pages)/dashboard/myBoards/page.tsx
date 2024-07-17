@@ -27,14 +27,11 @@ const MyBoardsPage = async () => {
 
   const extendedUser = await getExtendedUser(user.id);
 
-  console.log("extended user", extendedUser);
-
+  const allowedBoards = extendedUser?.allowedBoards || 1;
   const numberOfBoardsCreated = boards?.length || 0;
 
-  console.log(
-    "num boards created and allowed",
-    numberOfBoardsCreated
-  );
+  const isEligibleToCreateBoard =
+    numberOfBoardsCreated < allowedBoards;
 
   return (
     <div className='max-w-6xl mx-auto p-10'>
@@ -42,13 +39,16 @@ const MyBoardsPage = async () => {
         My Boards
       </h1>
       <div className='my-20'>
-        {numberOfBoardsCreated > 1 ? (
+        {isEligibleToCreateBoard ? (
+          <CreateBoardForm />
+        ) : (
           <Alert variant={"destructive"}>
             <AlertCircle className='h-4 w-4' />
             <AlertTitle>Heads up!</AlertTitle>
             <AlertDescription>
-              <p className='w-full flex justify-between items-center'>
-                1 Memory board is allowed for all. To create
+              <p className='w-full flex justify-between items-center text-base sm:text-lg'>
+                You have reached your limit of{" "}
+                {allowedBoards} board{"(s)"}. To create
                 additional memories, see our specials!
                 <Button asChild>
                   <Link href={"/purchase"}>View Deals</Link>
@@ -56,8 +56,6 @@ const MyBoardsPage = async () => {
               </p>
             </AlertDescription>
           </Alert>
-        ) : (
-          <CreateBoardForm />
         )}
       </div>
       <div className='flex flex-col gap-4 justify-center'>
