@@ -6,6 +6,7 @@ import { signIn, signOut } from "@/auth";
 
 import { createClient } from "@/utils/supabase/server";
 import { loginFormSchema } from "@/lib/schemas";
+import { ExtendedUser } from "@/app/types";
 
 export async function login(formData: FormData) {
   const supabase = createClient();
@@ -99,23 +100,14 @@ export const getCurrentUser = async () => {
 
 export const getExtendedUser = async (userId: string) => {
   const supabase = createClient();
-  console.log("user id", userId);
-  const { data, error } = await supabase
+
+  const { data } = await supabase
     .from("user")
     .select("*")
     .eq("id", userId)
     .limit(1);
 
-  if (error) {
-    console.error(error.message);
-    return {
-      error: error.message,
-    };
-  }
-
-  console.log("data", data);
-
   if (!data) return null;
 
-  return data[0];
+  return data[0] as ExtendedUser;
 };
