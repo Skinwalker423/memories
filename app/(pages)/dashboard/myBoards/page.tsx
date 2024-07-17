@@ -2,7 +2,10 @@ import React from "react";
 import { redirect } from "next/navigation";
 
 import { getAllUserBoards } from "@/app/actions/memory_boards";
-import { getCurrentUser } from "@/app/actions/users";
+import {
+  getCurrentUser,
+  getExtendedUser,
+} from "@/app/actions/users";
 
 import CreateBoardForm from "@/components/memory_game/CreateBoardForm";
 
@@ -21,6 +24,10 @@ const MyBoardsPage = async () => {
   if (!user) redirect("/login");
 
   const boards = await getAllUserBoards(user.id);
+
+  const extendedUser = await getExtendedUser(user.id);
+
+  console.log("extended user", extendedUser);
 
   const numberOfBoardsCreated = boards?.length || 0;
 
