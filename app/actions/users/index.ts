@@ -60,16 +60,22 @@ export async function signup(formData: FormData) {
     };
   }
 
-  const data = {
+  const dataValues = {
     email: formValues.data.email,
     password: formValues.data.password,
   };
 
-  const { error } = await supabase.auth.signUp(data);
+  const { data, error } = await supabase.auth.signUp(
+    dataValues
+  );
 
-  if (error) {
+  if (error || !data.user) {
     redirect(`/auth/error?error=SignUpError`);
   }
+
+  await supabase.from("user").insert({
+    id: data.user.id,
+  });
 
   revalidatePath("/", "layout");
   return {
