@@ -12,7 +12,6 @@ export function MemoryGame({
   boardImages,
   title,
 }: MemoryGameProps) {
-  console.log("b-images props", boardImages, title);
   const [images, setImages] = useState(boardImages);
 
   const [selectedOne, setSelectedOne] = useState<
