@@ -8,11 +8,11 @@ const DashboardLayout = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className='sm:grid sm:grid-cols-4'>
-      <div className='sm:grid-cols-1'>
+    <div className='md:grid md:grid-cols-4'>
+      <div className='md:grid-cols-1'>
         <SideBar />
       </div>
-      <div className='sm:col-span-3'>{children}</div>
+      <div className='md:col-span-3'>{children}</div>
       <MobileSideBar />
     </div>
   );
