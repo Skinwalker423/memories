@@ -11,9 +11,6 @@ const DashboardPage = async () => {
   return (
     <div className='min-h-screen w-full'>
       <h1>Dashboard</h1>
-      <Button variant={"destructive"} asChild>
-        <Link href={"/dashboard/myBoards"}>My Boards</Link>
-      </Button>
     </div>
   );
 };
