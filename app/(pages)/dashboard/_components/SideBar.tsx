@@ -37,16 +37,14 @@ const dashboardNavLinks = [
 
 export const SideBar = () => {
   const pathname = usePathname();
-
-  console.log("params", pathname);
   return (
     <div className='hidden md:block w-full bg-white dark:bg-slate-900'>
       <aside
         id='sidebar'
-        className='fixed left-0 top-50 z-40 h-[calc(100vh-6rem)] w-fit lg:w-64 transition-transform'
+        className='left-0 top-50 h-[calc(100vh-6rem)] w-fit xl:w-64 transition-transform'
         aria-label='Sidebar'
       >
-        <div className='flex h-full flex-col overflow-y-auto border-r border-slate-200 bg-white px-3 py-4 dark:border-slate-700 dark:bg-slate-900'>
+        <div className='flex h-full flex-col overflow-y-auto border border-slate-200 bg-white px-3 py-4 dark:border-slate-700 dark:bg-slate-900'>
           <div className='mb-10 flex items-center rounded-lg px-3 py-2 text-slate-900 dark:text-white'>
             <Command />
             <span className='ml-3 text-base font-semibold'>
