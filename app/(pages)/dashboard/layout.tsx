@@ -9,7 +9,7 @@ const DashboardLayout = ({
 }) => {
   return (
     <div className='md:grid md:grid-cols-4'>
-      <div className='md:grid-cols-1'>
+      <div className='grid-cols-1'>
         <SideBar />
       </div>
       <div className='md:col-span-3'>{children}</div>
