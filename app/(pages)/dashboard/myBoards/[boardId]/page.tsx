@@ -17,14 +17,13 @@ const MyBoardPage = async ({
   const user = await getCurrentUser();
   if (!user) redirect("/login");
   const boardId = params.boardId;
-  console.log("board id", boardId);
+
   const board = await fetchBoardById(boardId);
 
   if (!board) return notFound();
-  console.log("board", board);
+
   const numberOfImages = board.images.length;
   const isBoardComplete = numberOfImages === 8;
-  console.log("is complete", isBoardComplete);
 
   return (
     <>

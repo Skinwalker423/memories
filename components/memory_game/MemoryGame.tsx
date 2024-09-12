@@ -59,14 +59,11 @@ export function MemoryGame({
     if (selectedOne !== null && selectedTwo !== null) {
       setEvaluating(true);
       if (images[selectedOne] === images[selectedTwo]) {
-        console.log("matched!");
         setCorrectImages([
           ...correctImages,
           selectedOne,
           selectedTwo,
         ]);
-      } else {
-        console.log("incorrect!");
       }
 
       setTimeout(() => {

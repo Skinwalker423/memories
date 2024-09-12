@@ -34,9 +34,7 @@ export function LoginForm() {
     values: z.infer<typeof loginFormSchema>
   ) {
     // Do something with the form values.
-
     // ✅ This will be type-safe and validated.
-    console.log(values);
   }
 
   const handleLoginSubmit = async (formData: FormData) => {

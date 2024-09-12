@@ -5,7 +5,7 @@ import Link from "next/link";
 interface BoardCardProps {
   image: string;
   title: string;
-  id: string;
+  id: number;
 }
 
 const BoardCard = ({
@@ -20,7 +20,7 @@ const BoardCard = ({
         className='relative w-full h-full rounded-2xl'
       >
         <Image
-          src={image}
+          src={image || "/images/skinwalker.jpg"}
           alt='john wick'
           className='object-cover rounded-t-2xl transition-transform hover:scale-105'
           fill

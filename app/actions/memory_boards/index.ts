@@ -17,6 +17,20 @@ export const fetchBoardById = async (id: string) => {
 
   return memory_board[0] as MemoryBoard;
 };
+export const fetchToPBoards = async () => {
+  const supabase = createClient();
+  const { data: memory_boards } = await supabase
+    .from("memory_board")
+    .select("*");
+
+  if (!memory_boards) return null;
+
+  const filteredBoards = memory_boards.filter(
+    (item) => item.images.length === 8
+  );
+
+  return filteredBoards as MemoryBoard[];
+};
 
 export const createBoardTitle = async (title: string) => {
   const supabase = createClient();
@@ -46,7 +60,7 @@ export const createBoardTitle = async (title: string) => {
 
 export const getAllUserBoards = async (userId: string) => {
   const supabase = createClient();
-  console.log("userId", userId);
+
   const { data, error } = await supabase
     .from("memory_board")
     .select("*")
@@ -106,7 +120,7 @@ export async function updateMemory(formData: FormData) {
 
     if (uploadError) {
       console.error(uploadError.message);
-      console.log("error", uploadError.message);
+
       await supabase
         .from("memory_board")
         .update({ images: [...images] })

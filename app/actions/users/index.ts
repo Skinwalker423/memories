@@ -44,7 +44,6 @@ export async function login(formData: FormData) {
 
 export async function signup(formData: FormData) {
   const supabase = createClient();
-  console.log("form action went through");
   // type-casting here for convenience
   // in practice, you should validate your inputs
   const formDataFormatted = {
