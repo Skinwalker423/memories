@@ -30,7 +30,7 @@ const dashboardNavLinks = [
   },
   {
     label: "Settings",
-    href: "dashboard/settings",
+    href: "/dashboard/settings",
     icon: <Settings2 />,
   },
 ];
