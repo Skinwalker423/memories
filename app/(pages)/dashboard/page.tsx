@@ -10,11 +10,11 @@ const DashboardPage = async () => {
   if (!user) redirect("/login");
 
   return (
-    <div className='h-[calc(100vh-6rem)] w-full grid  grid-cols-3 grid-rows-2 border border-red-300 overflow-hidden gap-3'>
-      <div className='col-span-2 bg-yellow-200 p-5'>
+    <div className='min-h-[calc(100vh-6rem)] w-full grid grid-cols-2 md:grid-cols-3 grid-rows-4 md:grid-rows-2 border gap-3'>
+      <div className='col-span-2 md:col-span-2 p-5 h-full'>
         <BarChartDashboard />
       </div>
-      <div className='bg-red-300 p-5'>
+      <div className='p-5 col-span-2 md:col-span-1'>
         <PieChartDashboard />
       </div>
       <div className='bg-blue-100'>1</div>

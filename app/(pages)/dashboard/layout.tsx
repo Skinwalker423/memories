@@ -12,7 +12,7 @@ const DashboardLayout = ({
       <div className='grid-cols-1'>
         <SideBar />
       </div>
-      <div className='md:col-span-3'>{children}</div>
+      <div className='md:col-span-3 mb-20'>{children}</div>
       <MobileSideBar />
     </div>
   );
