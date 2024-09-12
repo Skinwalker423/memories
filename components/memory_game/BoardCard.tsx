@@ -14,10 +14,10 @@ const BoardCard = ({
   id,
 }: BoardCardProps) => {
   return (
-    <li className='w-96 h-96 border bg-neutral-200 shadow-md rounded-2xl flex flex-col items-center max-sm:w-40 max-sm:h-40 overflow-hidden'>
+    <li className='w-40 h-40 lg:w-96 lg:h-96  border bg-neutral-200 shadow-md rounded-2xl flex flex-col items-center max-sm:w-40 max-sm:h-40 overflow-hidden'>
       <Link
         href={`/boards/${id}`}
-        className='relative w-full h-1/2 rounded-2xl'
+        className='relative w-full h-full rounded-2xl'
       >
         <Image
           src={image}
@@ -27,7 +27,9 @@ const BoardCard = ({
           sizes="width: '100%'"
         />
       </Link>
-      <p>{title}</p>
+      <p className='text-base lg:text-xl py-3 text-center bg-slate-100/50'>
+        {title}
+      </p>
     </li>
   );
 };

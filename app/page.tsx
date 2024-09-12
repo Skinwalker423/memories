@@ -3,7 +3,7 @@ import BoardCard from "@/components/memory_game/BoardCard";
 
 const boards = [
   {
-    title: "Delicious Deserts Theme",
+    title: "Exotic Foods",
     id: "1",
     image: "/images/cheesecake.jpg",
   },
@@ -14,7 +14,7 @@ const boards = [
   },
   {
     title: "Harry Potter Theme",
-    id: "3",
+    id: "5",
     image: "/images/fakeavatar.jpg",
   },
 ];
