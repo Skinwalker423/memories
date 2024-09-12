@@ -1,39 +1,12 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import {
-  HomeIcon,
-  Images,
-  Settings2,
-  User2,
-  Command,
-} from "lucide-react";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
-
-const dashboardNavLinks = [
-  {
-    label: "Home",
-    href: "/dashboard",
-    icon: <HomeIcon />,
-  },
-  {
-    label: "My Boards",
-    href: "/dashboard/myBoards",
-    icon: <Images />,
-  },
-  {
-    label: "Profile",
-    href: "/dashboard/profile",
-    icon: <User2 />,
-  },
-  {
-    label: "Settings",
-    href: "/dashboard/settings",
-    icon: <Settings2 />,
-  },
-];
+import { dashboardNavLinks } from "@/app/constants";
+import { Command } from "lucide-react";
 
 export const SideBar = () => {
   const pathname = usePathname();
