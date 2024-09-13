@@ -131,14 +131,16 @@ export function MemoryGame({
                     sizes='(min-width: 80px)'
                     className={`object-cover w-full rounded-lg front ${!selected}`}
                   />
-
-                  <Image
-                    src={"/next.svg"}
-                    alt={"stock"}
-                    fill
-                    sizes='(min-width: 80px)'
-                    className={`absolute top-0 rounded-lg border shadow-sm object-contain w-full h-auto back bg-slate-50`}
-                  />
+                  <div className='absolute top-0 rounded-lg border shadow-sm object-cover w-full h-full back'>
+                    <Image
+                      src={images[0] || "/next.svg"}
+                      alt={"stock"}
+                      fill
+                      sizes='(min-width: 80px)'
+                      className={`absolute top-0 rounded-lg border shadow-sm object-cover w-full h-auto back`}
+                    />
+                    <div className='absolute inset-0 bg-slate-500/80 z-50' />
+                  </div>
 
                   <div
                     className={`${
