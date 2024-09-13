@@ -83,11 +83,15 @@ export function MemoryGame({
   return (
     <div className='w-full h-full flex items-start justify-between'>
       <aside className='w-fit h-screen border-r shadow-md hidden lg:block max-w-[15rem]'>
-        <div className='px-4'>
-          <h1 className='text-2xl font-bold text-red-400 text-center text-clip'>
+        <div className='p-4 flex flex-col w-full h-full gap-10'>
+          <h1 className='text-2xl font-bold text-secondary text-center text-clip'>
             {title}
           </h1>
-          <p>Stats</p>
+          <div className='bg-slate-50 w-full h-40 rounded-lg p-2 text-left'>
+            <h3 className='text-xl font-semibold'>Stats</h3>
+            <div>Best time:</div>
+            <div>guesses:</div>
+          </div>
           <button
             onClick={handlePlayAgainClick}
             className='px-4 py-2 bg-green-500 rounded-xl'
